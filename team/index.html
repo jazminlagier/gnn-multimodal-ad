@@ -1,0 +1,78 @@
+---
+layout: default
+title: "Team"
+description: "People in the lab"
+group: navigation
+navorder: 2
+---
+{% include JB/setup %}
+
+<div class="bigspacer"></div>
+{% assign current_team = site.categories.team | where: "alum","false"%}
+{% assign memberindex = 0 %}
+{% for member in current_team reversed %}
+	{% assign memberindex = memberindex | plus: 1 %}
+	{% assign colindex = memberindex | modulo: 3 %}
+	{% if colindex == 1 %} <!-- opening of a new row -->
+	<div class="row">
+	{% endif %}
+	<div class="col-md-4 memberbox">
+		<div class="media">
+				<a class="pull-left" href="{{ member.url }}">
+				<img class="media-object member-photo team-member-images" src="{{ member.image }}">
+				</a>
+			 	<div class="media-body">
+				<div class="head media-heading member-name"><a href="{{ member.url }}" class="off">{{ member.title }}</a></div>
+				<p class="note">{{ member.position }}</p>
+				</div>
+		</div>
+    </div>	  
+	{% if colindex == 0 %} <!-- closing a row -->
+	</div><div class="bigspacer"></div>
+	{% endif %}
+{% endfor %}
+{% if colindex != 0 %} <!-- close last open row -->
+</div><div class="bigspacer"></div>
+{% endif %}
+
+<div class="bigspacer"></div>
+<hr/>
+
+<div class="row">
+	<div class="col-md-12">
+		<img class="team-photo" src="/assets/images/team/Saeed-lab-2024.jpg"/>
+		<img class="team-photo" src="/assets/images/team/Saeed-lab-2024-2.jpg"/>
+	</div>
+</div>
+
+<div class="bigspacer"></div>
+<hr/>
+<div class="bigtitle text-center">Alumni</div>
+<div class="bigspacer"></div>
+
+{% assign alumni = site.categories.team | where: "alum","true"%}
+{% assign memberindex = 0 %}
+{% for member in alumni %}
+	{% assign memberindex = memberindex | plus: 1 %}
+	{% assign colindex = memberindex | modulo: 3 %}
+	{% if colindex == 1 %} <!-- opening of a new row -->
+	<div class="row">
+	{% endif %}
+	<div class="col-md-4 memberbox">
+		<div class="media">
+				<a class="pull-left" href="{{ member.url }}">
+				<img class="media-object member-photo team-member-images" src="{{ member.image }}" style="width:200px;height: 300px; object-fit:cover;">
+				</a>
+			 	<div class="media-body">
+				<div class="head media-heading member-name"><a href="{{ member.url }}" class="off">{{ member.title }}</a></div>
+				<p class="note">{{ member.position }}</p>
+				</div>
+		</div>
+    </div>	  
+	{% if colindex == 0 %} <!-- closing a row -->
+	</div><div class="bigspacer"></div>
+	{% endif %}
+{% endfor %}
+{% if colindex != 0 %} <!-- close last open row -->
+</div><div class="bigspacer"></div>
+{% endif %}

@@ -1,0 +1,11 @@
+<!-- Twitter -->
+<div>
+	<i class="fa fa-twitter fa-fw"></i>
+	<a class="off" href="https://twitter.com/intent/tweet?text={{ page.title }} {{ page.url | absolute_url }}" target="_blank">tweet this page</a>
+</div>
+{% if page.fulltext %}
+	<div>
+		<i class="fa fa-twitter fa-fw"></i>
+		<a class="off" href="https://twitter.com/intent/tweet?text=Check out this paper! {{ page.fulltext }}" target="_blank">tweet paper</a>
+	</div>
+{% endif %}
