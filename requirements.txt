@@ -1,0 +1,19 @@
+# Core scientific stack
+numpy>=1.23
+pandas>=1.5
+scipy>=1.9
+scikit-learn>=1.1
+matplotlib>=3.6
+seaborn>=0.12
+PyYAML>=6.0
+
+# Deep learning.
+# torch and torch-geometric must be installed with builds that match your CUDA
+# toolkit (this code was developed against PyTorch 2.x with CUDA 11.6). Install
+# torch first, then PyTorch Geometric from the matching wheel index.
+#   https://pytorch.org/get-started/locally/
+#   https://pytorch-geometric.readthedocs.io/en/latest/install/installation.html
+# Note: torch-scatter is not required. Pooling uses torch_geometric's native
+# global_mean_pool, which does not depend on the torch-scatter extension.
+torch>=2.0
+torch-geometric>=2.3

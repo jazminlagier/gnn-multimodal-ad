@@ -1,0 +1,73 @@
+# Example configuration for the multimodal GNN AD classification runner.
+#
+# Replace every /path/to/... placeholder with a real path before running.
+# ADNI data are not distributed with this repository. Access must be requested
+# through ADNI/LONI according to the ADNI Data Use Agreement.
+#
+# Run with:
+#     python src/main_gnn_adni.py --config configs/example_config.yaml
+
+seed: 42
+n_folds: 5
+output_dir: /path/to/output_dir
+
+# Keep this false when preparing shared/public runs. It prevents saving
+# per-participant GAT attention dumps or other individual-level artifacts.
+save_participant_artifacts: false
+
+data:
+  # Directory of per-session Desikan-Killiany functional connectivity matrices.
+  fc_matrices_dir: /path/to/fc_matrices_desikan_killiany
+
+  # Participant/session table with age, sex, APOE, diagnosis, and session IDs.
+  demographics_file: /path/to/participants_sessions_demographics.csv
+
+  # Pre-extracted regional tau and amyloid PET SUVR table.
+  regional_pet_file: /path/to/participants_sessions_regional_pet.csv
+
+  # Optional regional sMRI table aligned to the regional PET schema.
+  regional_smri_file: null
+
+  # Optional FreeSurfer regional sMRI export and corresponding demographics file.
+  freesurfer_file: null
+  freesurfer_demographics_file: null
+
+graph:
+  threshold: null
+  top_k: null
+
+# For the GAT paper, the default run trains only the GAT model.
+# Additional available options in the code are: gcn, gkan.
+models:
+  - gat
+
+training:
+  epochs: 300
+  batch_size: 16
+  learning_rate: 0.001
+  weight_decay: 0.001
+  early_stopping_patience: 50
+  focal_gamma: 1.5
+  label_smoothing: 0.10
+
+# Minimal ablation set. Add more experiments only if they are needed for the paper.
+experiments:
+  - name: ablation_connectivity_only
+    feature_set: CONNECTIVITY_ONLY
+    balanced_sampling: false
+    focal_gamma: 1.5
+
+  - name: ablation_broadcast_pet_age_sex_apoe
+    feature_set: PET_AGE_SEX_APOE
+    balanced_sampling: false
+    focal_gamma: 1.5
+
+  - name: ablation_broadcast_smri_age_sex_apoe
+    feature_set: SMRI_AGE_SEX_APOE
+    balanced_sampling: false
+    focal_gamma: 1.5
+
+  - name: ablation_full_multimodal
+    feature_set: FULL
+    balanced_sampling: false
+    focal_gamma: 1.5

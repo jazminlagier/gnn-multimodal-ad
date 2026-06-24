@@ -1,14 +1,60 @@
-_site/*
-_theme_packages/*
+# ADNI and derived participant/session-level data
+/data/
+/raw_data/
+/processed_data/
+fc_matrices/
+*_fc_matrices/
+freesurfer/
+*UCBERKELEY*
+*UCSFFSX*
+sub-*/
+sub*ADNI*
 
-drummondlab.sublime-project
-drummondlab.sublime-workspace
+# Tabular data are excluded by default to avoid accidentally committing ADNI-derived files.
+*.csv
+*.tsv
+*.xlsx
+*.xls
 
-Gemfile.lock
-Thumbs.db
+# Model artifacts, outputs, and logs
+outputs/
+output/
+runs/
+results/
+results_*/
+checkpoints/
+interpretability/
+fold_*/
+*.pkl
+*.pt
+*.pth
+*.ckpt
+*.npy
+*.npz
+*.log
+*.out
+*.err
+
+# Local configs and secrets
+configs/local_*.yaml
+configs/*local*.yaml
+.env
+.env.*
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+env/
+.ipynb_checkpoints/
+
+# Editor / OS
+.vscode/
+.idea/
 .DS_Store
-
-!.gitkeep
-
-.rbenv-version
-.rvmrc
+Thumbs.db
